@@ -16,9 +16,17 @@ void UOverlayWidgetController::BindCallBacksToDependencies()
 {
 	UAuraBaseAttributeSet* Aura_AttributeSet = CastChecked<UAuraBaseAttributeSet>(AuraAtrributeSet);
 
-	AuraASC->GetGameplayAttributeValueChangeDelegate(Aura_AttributeSet->GetHealthAttribute()).AddUObject(this, &HealthChanged);
-	AuraASC->GetGameplayAttributeValueChangeDelegate(Aura_AttributeSet->GetMaxHealthAttribute()).AddUObject(this, &MaxHealthChanged);
+	AuraASC
+		->GetGameplayAttributeValueChangeDelegate(
+			Aura_AttributeSet->GetHealthAttribute())
+		.AddUObject(this, &UOverlayWidgetController::HealthChanged);
+
+	AuraASC
+		->GetGameplayAttributeValueChangeDelegate(
+			Aura_AttributeSet->GetMaxHealthAttribute())
+		.AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
 }
+
 
 void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data)
 {
